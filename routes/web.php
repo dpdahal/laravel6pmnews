@@ -22,6 +22,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'company-backend', 'middlewa
         Route::any('update-user-status', [UserController::class, 'status'])->name('update-user-status');
         Route::any('delete-user/{id}', [UserController::class, 'delete'])->name('delete-user');
     });
+    Route::resource('manage-category',"\App\Http\Controllers\Backend\CategoryController");
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 });
