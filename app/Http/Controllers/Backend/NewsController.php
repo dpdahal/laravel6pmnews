@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\News\Category;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -20,7 +21,8 @@ class NewsController extends Controller
      */
     public function create()
     {
-        //
+        $categoryData = Category::all();
+        return view($this->pagePath . 'news.create', compact('categoryData'));
     }
 
     /**

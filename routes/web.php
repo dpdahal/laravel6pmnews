@@ -23,6 +23,7 @@ Route::group(['namespace' => 'Backend', 'prefix' => 'company-backend', 'middlewa
         Route::any('delete-user/{id}', [UserController::class, 'delete'])->name('delete-user');
     });
     Route::resource('manage-category',"\App\Http\Controllers\Backend\CategoryController");
+    Route::resource('manage-news',"\App\Http\Controllers\Backend\NewsController");
     Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
 });

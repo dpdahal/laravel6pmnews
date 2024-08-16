@@ -17,7 +17,9 @@
 
     <!-- Template Main JS File -->
     <script src="{{url('backend-assets/assets/js/jquery.js')}}"></script>
+    <script src="{{url('ckeditor/ckeditor.js')}}"></script>
     <script src="{{url('backend-assets/assets/js/main.js')}}"></script>
+   @yield('custom-scripts')
 
     </body>
 

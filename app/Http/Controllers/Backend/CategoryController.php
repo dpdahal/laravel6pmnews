@@ -6,38 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Models\News\Category;
 use App\Models\News\News;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-//        $category=Category::all();
-        $news=News::all();
-       foreach ($news as $n){
-              echo $n->title;
-                echo "<br>";
-              echo $n->category->name;
-              echo "<br>";
-                echo $n->user->name;
-              echo "<hr>";
+        $category = Category::all();
+        return view($this->pagePath . 'category.index', compact('category'));
 
-       }
-//        $news=DB::select("select categories.*,news.* from news
-//join categories on categories.id=news.category_id");
-//        foreach ($category as $cat){
-//              echo $cat->name;
-//                echo "<br>";
-//           foreach ($cat->newsData as $news){
-//               echo $news->title;
-//               echo "<br>";
-//           }
-//
-//           echo "<hr>";
-//        }
     }
 
     /**
@@ -45,15 +22,23 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view($this->pagePath . 'category.create');
     }
 
-    /**
+    /*
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $category = $request->validate([
+            'name' => 'required|unique:categories,name'
+        ]);
+        try {
+            Category::create($category);
+            return redirect()->route('manage-category.index')->with('success', 'Category created successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
     }
 
     /**
@@ -61,7 +46,8 @@ class CategoryController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $catData = Category::find($id);
+        return view($this->pagePath . 'category.show', compact('catData'));
     }
 
     /**
@@ -69,7 +55,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = Category::find($id);
+        return view($this->pagePath . 'category.update', compact('category'));
     }
 
     /**
@@ -77,7 +64,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $category = $request->validate([
+            'name' => 'required|unique:categories,name,' . $id
+        ]);
+        try {
+            Category::find($id)->update($category);
+            return redirect()->route('manage-category.index')->with('success', 'Category updated successfully');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong');
+        }
     }
 
     /**
@@ -85,6 +80,12 @@ class CategoryController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $findNews = News::where('category_id', '=', $id)->count();
+        if ($findNews > 0) {
+            return redirect()->back()->with('error', 'This category has news. You can not delete this category');
+        } else {
+            Category::find($id)->delete();
+            return redirect()->back()->with('success', 'Category deleted successfully');
+        }
     }
 }

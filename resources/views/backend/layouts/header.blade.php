@@ -18,6 +18,7 @@
     <!-- Vendor CSS Files -->
     <link href="{{url('backend-assets/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{url('backend-assets/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{url('ckeditor/contents.css')}}" rel="stylesheet">
     <link href="{{url('backend-assets/assets/css/style.css')}}" rel="stylesheet">
 </head>
 
