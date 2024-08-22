@@ -38,6 +38,14 @@ class UserTableSeeder extends Seeder
                 'role' => 'user',
                 'image' => '',
             ],
+            [
+                'name' => 'gopal',
+                'email' => 'gopal@gmail.com',
+                'password' => bcrypt('gopal002'),
+                'gender' => 'male',
+                'role' => 'user',
+                'image' => '',
+            ],
         ];
 
         foreach ($users as $user) {

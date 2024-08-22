@@ -4,10 +4,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Frontend\ApplicationController;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('index');
+// ================== Frontend Routes ==================
+Route::get('/', [ApplicationController::class, 'index'])->name('index');
 
 
 Route::get('login', [LoginController::class, 'index'])->name('login');

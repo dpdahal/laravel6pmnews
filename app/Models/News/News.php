@@ -18,7 +18,15 @@ class News extends Model
         'image',
         'summary',
         'description',
+        'page_visit',
     ];
+
+
+    public function getSummaryAttribute($value)
+    {
+        return substr($value,0,100);
+
+    }
 
     public function category()
     {

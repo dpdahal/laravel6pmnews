@@ -28,35 +28,38 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <form action="{{route('update-user-status')}}" method="post">
-                                    @csrf
-                                    @foreach($usersData as $key=>$user)
-                                        <tr>
-                                            <td>{{++$key}}</td>
-                                            <td>{{$user->name}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td>{{$user->gender}}</td>
-                                            <td>
+
+                                @foreach($usersData as $key=>$user)
+                                    <tr>
+                                        <td>{{++$key}}</td>
+                                        <td>{{$user->name}}</td>
+                                        <td>{{$user->email}}</td>
+                                        <td>{{$user->gender}}</td>
+                                        <td>
+                                            <form action="{{route('update-user-status')}}" method="post">
+                                                @csrf
                                                 <input type="hidden" name="criteria" value="{{$user->id}}">
+
                                                 @if($user->role=='admin')
                                                     <button class="badge bg-primary">Admin</button>
                                                 @else
                                                     <button class="badge bg-success">User</button>
                                                 @endif
-                                            </td>
-                                            <td>{{$user->imge}}</td>
-                                            <td>{{$user->created_at->diffForHumans()}}</td>
-                                            <td>
-                                                @if(auth()->user()->role=='admin')
-                                                    <a href="{{route('delete-user',$user->id)}}"
-                                                    onclick="return confirm('are you sure?')"
-                                                    class="btn btn-danger btn-sm">Delete</a>
-                                                @endif
-                                            </td>
+                                            </form>
+                                        </td>
+                                        <td>{{$user->imge}}</td>
+                                        <td>{{$user->created_at->diffForHumans()}}</td>
+                                        <td>
+                                            @if(auth()->user()->role=='admin')
+                                                <a href="{{route('delete-user',$user->id)}}"
+                                                   onclick="return confirm('are you sure?')"
+                                                   class="btn btn-danger btn-sm">Delete</a>
+                                            @endif
+                                        </td>
 
-                                        </tr>
-                                    @endforeach
-                                </form>
+                                    </tr>
+                                @endforeach
+
                                 </tbody>
                             </table>
 

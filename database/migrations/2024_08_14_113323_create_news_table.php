@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('image')->nullable();
             $table->text('summary')->nullable();
             $table->text('description')->nullable();
-            $table->integer('page_visite')->default(0);
+            $table->integer('page_visit')->default(0);
             $table->timestamps();
         });
     }

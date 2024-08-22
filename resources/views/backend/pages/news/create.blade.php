@@ -15,11 +15,17 @@
                                           enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group mb-2">
-                                            <label for="category">Category</label>
+                                            <label for="category">Category:
+                                                <a style="color: red;">{{$errors->first('category_id')}}</a>
+
+                                            </label>
                                             <select class="form-control" name="category_id" id="category">
                                                 <option value="">Select Category</option>
                                                 @foreach($categoryData as $category)
-                                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                                    <option value="{{$category->id}}"
+                                                            {{old('category_id') == $category->id ? 'selected' : ''}}>
+                                                        {{$category->name}}
+                                                    </option>
                                                 @endforeach
                                             </select>
 

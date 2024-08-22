@@ -69,6 +69,7 @@ class UserController extends Controller
 
     public function status(Request $request)
     {
+
         if ($request->isMethod('post')) {
             $id = $request->criteria;
             $user = User::findOrFail($id);
