@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\ApplicationController;
 
 // ================== Frontend Routes ==================
 Route::get('/', [ApplicationController::class, 'index'])->name('index');
+Route::get('news-details/{slug}', [ApplicationController::class, 'newsDetails'])->name('news-details');
 
 
 Route::get('login', [LoginController::class, 'index'])->name('login');
